@@ -1,9 +1,4 @@
 # SunnyWeather
 
-这是一个用于学习的git项目
-
-1. merge
-2. push
-3. pull
-4. commit
-5. clone
+《第一行代码 Android》原书案例
+ - 修改了部分代码，2024.11可用
