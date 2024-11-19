@@ -1,12 +1,17 @@
 package com.sunnyweather.android.ui.weather
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.provider.CalendarContract.Colors
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowInsets
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -26,9 +31,15 @@ class WeatherActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProvider(this)[WeatherViewModel::class.java] }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+//        enableEdgeToEdge() // 允许应用内容扩展到屏幕的边缘，而不仅仅是显示在状态栏和导航栏下方。
+        val decorView = window.decorView
+        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.statusBarColor = Color.TRANSPARENT
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
 

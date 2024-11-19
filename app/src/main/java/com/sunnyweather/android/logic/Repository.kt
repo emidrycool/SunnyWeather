@@ -1,6 +1,8 @@
 package com.sunnyweather.android.logic
 
 import androidx.lifecycle.liveData
+import com.sunnyweather.android.logic.dao.PlaceDao
+import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.Weather
 import com.sunnyweather.android.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
@@ -8,6 +10,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * 封装了集合的逻辑
+ */
 object Repository {
 
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
@@ -50,6 +55,12 @@ object Repository {
             }
         }
     }
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 
     /**
      * block: suspend () -> Result<T> :表示一个挂起函数，这个函数不接受任何参数，并且返回一个 Result<T> 类型的值
